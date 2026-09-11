@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRCONDOS - Sociedade de Crédito Direto S.A.</title>
+<style>
+  :root{
+    --azul:#0a2540; --azul-claro:#1a3a5c; --verde:#2ecc71;
+    --cinza:#f5f7fa; --texto:#333; --branco:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;}
+  html{scroll-behavior:smooth;}
+  body{color:var(--texto);line-height:1.6;}
+  header{
+    background:var(--azul);color:#fff;padding:16px 8%;
+    display:flex;justify-content:space-between;align-items:center;
+    position:sticky;top:0;z-index:100;
+  }
+  .logo{font-size:1.6rem;font-weight:800;letter-spacing:1px;cursor:pointer;}
+  .logo span{color:var(--verde);}
+  nav a{
+    color:#fff;text-decoration:none;margin-left:24px;font-size:.95rem;
+    transition:.2s;cursor:pointer;
+  }
+  nav a:hover, nav a.ativo{color:var(--verde);}
+  .hamburguer{
+    display:none;background:none;border:none;color:#fff;
+    font-size:1.8rem;cursor:pointer;line-height:1;
+  }
+  .hero{
+    background:linear-gradient(135deg,var(--azul) 0%,var(--azul-claro) 100%);
+    color:#fff;text-align:center;padding:90px 8%;
+  }
+  .hero h1{font-size:2.6rem;margin-bottom:16px;}
+  .hero p{font-size:1.2rem;max-width:700px;margin:0 auto 32px;opacity:.9;}
+  .btn{
+    display:inline-block;background:var(--verde);color:#fff;padding:14px 36px;
+    border-radius:30px;text-decoration:none;font-weight:600;transition:.2s;
+    border:none;cursor:pointer;font-size:1rem;
+  }
+  .btn:hover{background:#27ae60;transform:translateY(-2px);}
+  section{padding:70px 8%;}
+  section h2{color:var(--azul);font-size:2rem;text-align:center;margin-bottom:40px;}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;}
+  .card{
+    background:var(--branco);border-radius:14px;padding:32px;
+    box-shadow:0 4px 18px rgba(0,0,0,.07);transition:.2s;
+  }
+  .card:hover{transform:translateY(-6px);box-shadow:0 8px 26px rgba(0,0,0,.12);}
+  .card .icone{font-size:2.4rem;margin-bottom:14px;}
+  .card h3{color:var(--azul);margin-bottom:10px;}
+  .cinza{background:var(--cinza);}
+  .sobre{max-width:800px;margin:0 auto;text-align:center;font-size:1.1rem;}
+  .card-link{display:block;text-decoration:none;color:inherit;cursor:pointer;}
+  .pagina-interna{max-width:820px;margin:0 auto;}
+  .pagina-interna h2{color:var(--azul);font-size:1.9rem;text-align:left;margin-bottom:8px;}
+  .pagina-interna .data{display:block;color:#888;font-size:.9rem;margin-bottom:28px;font-style:italic;}
+  .pagina-interna h3{color:var(--azul);margin:26px 0 8px;font-size:1.15rem;}
+  .pagina-interna p{margin-bottom:14px;text-align:justify;}
+  .voltar{display:inline-block;margin-bottom:30px;color:var(--verde);text-decoration:none;font-weight:600;cursor:pointer;}
+  footer{
+    background:var(--azul);color:#cfd8e3;padding:50px 8% 30px;font-size:.9rem;
+  }
+  .rodape-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px;margin-bottom:36px;}
+  footer h4{color:#fff;margin-bottom:14px;font-size:1rem;}
+  footer a{color:#cfd8e3;text-decoration:none;display:block;margin-bottom:8px;cursor:pointer;}
+  footer a:hover{color:var(--verde);}
+  .rodape-empresa{border-top:1px solid #2a4a6b;padding-top:24px;text-align:center;}
+  .rodape-empresa p{margin-bottom:6px;}
+  .rodape-empresa strong{color:#fff;}
+  @media(max-width:768px){
+    .hero h1{font-size:1.8rem;}
+    .hero{padding:60px 8%;}
+    header{flex-wrap:wrap;}
+    .hamburguer{display:block;}
+    nav{display:none;width:100%;flex-direction:column;padding-top:14px;}
+    nav.aberto{display:flex;}
+    nav a{margin:0;padding:12px 0;border-top:1px solid #2a4a6b;display:block;}
+  }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<header>
+  <div class="logo" onclick="irPara('inicio')">BRCONDOS<span>.</span></div>
+  <button class="hamburguer" id="btnMenu" aria-label="Abrir menu">☰</button>
+  <nav id="menu">
+    <a onclick="irPara('inicio')" data-menu="inicio">Início</a>
+    <a onclick="irPara('servicos')" data-menu="servicos">Serviços</a>
+    <a onclick="irPara('sobre')" data-menu="sobre">Sobre</a>
+    <a onclick="irPara('contato')" data-menu="contato">Contato</a>
+    <a onclick="irPara('privacidade')" data-menu="privacidade">Política de Privacidade</a>
+    <a onclick="irPara('termos')" data-menu="termos">Termos de Uso</a>
+  </nav>
+</header>
+
+<!-- ============ PÁGINA: INÍCIO ============ -->
+<div class="pagina" id="pag-inicio">
+  <div class="hero" id="inicio">
+    <h1>Crédito direto, simples e transparente</h1>
+    <p>A BRCONDOS é uma Sociedade de Crédito Direto (SCD) autorizada pelo Banco Central do Brasil, dedicada a oferecer soluções financeiras digitais com tecnologia, agilidade e segurança.</p>
+    <a class="btn" onclick="irPara('servicos')">Conheça nossas soluções</a>
+  </div>
+
+  <section id="servicos">
+    <h2>Nossos Serviços</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icone">💳</div>
+        <h3>Empréstimos Pessoais</h3>
+        <p>Crédito pessoal 100% digital, com análise rápida, taxas transparentes e dinheiro na conta em pouco tempo.</p>
+      </div>
+      <div class="card">
+        <div class="icone">🏦</div>
+        <h3>Crédito Direto</h3>
+        <p>Operações de crédito realizadas diretamente entre a instituição e o cliente, sem intermediários, reduzindo custos.</p>
+      </div>
+      <div class="card">
+        <div class="icone">📱</div>
+        <h3>Plataforma Digital</h3>
+        <p>Solicite, acompanhe e gerencie suas operações de crédito de forma simples, pelo computador ou celular.</p>
+      </div>
+      <div class="card">
+        <div class="icone">🔒</div>
+        <h3>Segurança e Conformidade</h3>
+        <p>Instituição autorizada pelo Banco Central do Brasil, com proteção de dados e conformidade com a legislação vigente.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cinza" id="sobre">
+    <h2>Sobre a BRCONDOS</h2>
+    <p class="sobre">
+      A <strong>BRCONDOS - Sociedade de Crédito Direto S.A.</strong> é uma instituição financeira
+      autorizada pelo Banco Central do Brasil que atua na concessão de crédito de forma
+      direta ao consumidor, utilizando tecnologia de ponta para oferecer uma experiência
+      simples, rápida e transparente. Nossa missão é democratizar o acesso ao crédito
+      com responsabilidade e inovação.
+    </p>
+  </section>
+
+  <section id="contato">
+    <h2>Fale Conosco</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icone">📍</div>
+        <h3>Endereço</h3>
+        <p>Rua Max Colin, 1030, Sala 08<br>América, Joinville - SC<br>CEP 89216-000</p>
+      </div>
+      <div class="card">
+        <div class="icone">🕐</div>
+        <h3>Atendimento</h3>
+        <p>Segunda a sexta-feira<br>das 9h às 18h</p>
+      </div>
+      <a class="card card-link" onclick="irPara('privacidade')">
+        <div class="icone">🔐</div>
+        <h3>Política de Privacidade</h3>
+        <p>Saiba como coletamos, usamos e protegemos seus dados pessoais. Clique para ler o documento completo.</p>
+      </a>
+      <a class="card card-link" onclick="irPara('termos')">
+        <div class="icone">📄</div>
+        <h3>Termos de Uso</h3>
+        <p>Conheça as regras e condições para utilização do nosso site e serviços. Clique para ler o documento completo.</p>
+      </a>
+    </div>
+  </section>
+</div>
+
+<!-- ============ PÁGINA: POLÍTICA DE PRIVACIDADE ============ -->
+<div class="pagina" id="pag-privacidade" style="display:none;">
+  <section>
+    <div class="pagina-interna">
+      <a class="voltar" onclick="irPara('inicio')">← Voltar ao início</a>
+      <h2>Política de Privacidade</h2>
+      <span class="data">Última atualização: setembro de 2026</span>
+      <h3>1. Introdução</h3>
+      <p>A BRCONDOS - Sociedade de Crédito Direto S.A. ("BRCONDOS"), CNPJ 49.933.388/0001-72, com sede em Rua Max Colin, 1030, Sala 08, América, Joinville - SC, CEP 89216-000, respeita a privacidade de seus usuários e está comprometida com a proteção dos dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD).</p>
+      <h3>2. Dados Coletados</h3>
+      <p>Coletamos dados pessoais fornecidos diretamente pelo usuário, como nome, CPF, data de nascimento, endereço, telefone e e-mail, bem como dados de navegação e informações necessárias à análise de crédito, quando aplicável.</p>
+      <h3>3. Finalidade do Tratamento</h3>
+      <p>Os dados são utilizados para: (i) identificação e cadastro do usuário; (ii) análise e concessão de crédito; (iii) prevenção a fraudes; (iv) cumprimento de obrigações legais e regulatórias perante o Banco Central do Brasil; e (v) melhoria dos nossos serviços.</p>
+      <h3>4. Compartilhamento de Dados</h3>
+      <p>O compartilhamento de dados ocorre apenas quando necessário, com operadores contratados sob sigilo, órgãos reguladores e autoridades competentes, ou mediante consentimento do titular.</p>
+      <h3>5. Segurança</h3>
+      <p>Adotamos medidas técnicas e administrativas adequadas para proteger os dados pessoais contra acessos não autorizados, perda, alteração ou divulgação indevida.</p>
+      <h3>6. Direitos do Titular</h3>
+      <p>O titular dos dados pode, a qualquer momento, solicitar a confirmação, o acesso, a correção, a anonimização, a portabilidade ou a eliminação de seus dados pessoais, bem como revogar o consentimento concedido.</p>
+      <h3>7. Encarregado de Dados (DPO)</h3>
+      <p>Para exercer seus direitos ou esclarecer dúvidas sobre esta política, entre em contato com nosso Encarregado de Proteção de Dados pelo endereço: Rua Max Colin, 1030, Sala 08, América, Joinville - SC, CEP 89216-000.</p>
+      <h3>8. Alterações</h3>
+      <p>Esta Política de Privacidade poderá ser atualizada periodicamente. Recomendamos a leitura regular desta página.</p>
+      <a class="voltar" style="margin-top:20px;" onclick="irPara('inicio')">← Voltar ao início</a>
+    </div>
+  </section>
+</div>
+
+<!-- ============ PÁGINA: TERMOS DE USO ============ -->
+<div class="pagina" id="pag-termos" style="display:none;">
+  <section>
+    <div class="pagina-interna">
+      <a class="voltar" onclick="irPara('inicio')">← Voltar ao início</a>
+      <h2>Termos de Uso</h2>
+      <span class="data">Última atualização: setembro de 2026</span>
+      <h3>1. Aceitação</h3>
+      <p>Ao acessar e utilizar o site da BRCONDOS - Sociedade de Crédito Direto S.A., CNPJ 49.933.388/0001-72, o usuário declara ter lido, compreendido e aceitado integralmente estes Termos de Uso.</p>
+      <h3>2. Objeto</h3>
+      <p>Estes termos regulam o acesso, a navegação e a utilização do site, bem como as informações e serviços disponibilizados pela BRCONDOS, instituição autorizada pelo Banco Central do Brasil a operar como Sociedade de Crédito Direto.</p>
+      <h3>3. Serviços</h3>
+      <p>A BRCONDOS oferece serviços de concessão de crédito direto ao consumidor, mediante análise de perfil e aprovação conforme políticas internas e regulamentação aplicável. A disponibilização de crédito não é garantida.</p>
+      <h3>4. Responsabilidades do Usuário</h3>
+      <p>O usuário se compromete a fornecer informações verdadeiras, exatas e atualizadas, sendo responsável por qualquer dano decorrente de informações incorretas ou fraudulentas.</p>
+      <h3>5. Propriedade Intelectual</h3>
+      <p>Todo o conteúdo do site (textos, marcas, logotipos, imagens e layout) é de propriedade da BRCONDOS ou licenciado a ela, sendo vedada sua reprodução sem autorização prévia.</p>
+      <h3>6. Limitação de Responsabilidade</h3>
+      <p>A BRCONDOS não se responsabiliza por indisponibilidades temporárias do site, nem por decisões de crédito que resultem em negativa de operações, as quais seguem critérios objetivos de análise.</p>
+      <h3>7. Legislação Aplicável</h3>
+      <p>Estes termos são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da Comarca de Joinville - SC para dirimir quaisquer controvérsias decorrentes deste documento.</p>
+      <h3>8. Contato</h3>
+      <p>Em caso de dúvidas sobre estes Termos de Uso, entre em contato: Rua Max Colin, 1030, Sala 08, América, Joinville - SC, CEP 89216-000.</p>
+      <a class="voltar" style="margin-top:20px;" onclick="irPara('inicio')">← Voltar ao início</a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="rodape-grid">
+    <div>
+      <h4>BRCONDOS</h4>
+      <p>Sociedade de Crédito Direto S.A., autorizada pelo Banco Central do Brasil, dedicada a soluções de crédito digitais.</p>
+    </div>
+    <div>
+      <h4>Institucional</h4>
+      <a onclick="irPara('sobre')">Sobre nós</a>
+      <a onclick="irPara('privacidade')">Política de Privacidade</a>
+      <a onclick="irPara('termos')">Termos de Uso</a>
+    </div>
+    <div>
+      <h4>Endereço</h4>
+      <p>Rua Max Colin, 1030, Sala 08<br>América, Joinville - SC<br>CEP 89216-000</p>
+    </div>
+  </div>
+  <div class="rodape-empresa">
+    <p><strong>BRCONDOS SOCIEDADE DE CRÉDITO DIRETO S.A.</strong></p>
+    <p>CNPJ: 49.933.388/0001-72</p>
+    <p>Rua Max Colin, 1030, Sala 08 - América, Joinville - SC - CEP 89216-000</p>
+    <p style="margin-top:14px;opacity:.7;">© 2026 BRCONDOS. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+var btnMenu = document.getElementById('btnMenu');
+var menu = document.getElementById('menu');
+btnMenu.addEventListener('click', function(){
+  menu.classList.toggle('aberto');
+  btnMenu.textContent = menu.classList.contains('aberto') ? '✕' : '☰';
+});
+
+function irPara(destino){
+  var docs = { 'privacidade':'pag-privacidade', 'termos':'pag-termos' };
+  var paginas = document.querySelectorAll('.pagina');
+  if(docs[destino]){
+    paginas.forEach(function(p){ p.style.display = 'none'; });
+    document.getElementById(docs[destino]).style.display = 'block';
+    window.scrollTo({top:0, behavior:'smooth'});
+  } else {
+    document.getElementById('pag-inicio').style.display = 'block';
+    document.getElementById('pag-privacidade').style.display = 'none';
+    document.getElementById('pag-termos').style.display = 'none';
+    var alvo = document.getElementById(destino);
+    if(alvo){
+      setTimeout(function(){ alvo.scrollIntoView({behavior:'smooth'}); }, 50);
+    }
+  }
+  document.querySelectorAll('nav a').forEach(function(a){
+    a.classList.toggle('ativo', a.getAttribute('data-menu') === destino);
+  });
+  menu.classList.remove('aberto');
+  btnMenu.textContent = '☰';
+}
+</script>
+
+</body>
+</html>
