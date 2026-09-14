@@ -1,285 +1,1147 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BRCONDOS - Sociedade de Crédito Direto S.A.</title>
-<style>
-  :root{
-    --azul:#0a2540; --azul-claro:#1a3a5c; --verde:#2ecc71;
-    --cinza:#f5f7fa; --texto:#333; --branco:#ffffff;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;}
-  html{scroll-behavior:smooth;}
-  body{color:var(--texto);line-height:1.6;}
-  header{
-    background:var(--azul);color:#fff;padding:16px 8%;
-    display:flex;justify-content:space-between;align-items:center;
-    position:sticky;top:0;z-index:100;
-  }
-  .logo{font-size:1.6rem;font-weight:800;letter-spacing:1px;cursor:pointer;}
-  .logo span{color:var(--verde);}
-  nav a{
-    color:#fff;text-decoration:none;margin-left:24px;font-size:.95rem;
-    transition:.2s;cursor:pointer;
-  }
-  nav a:hover, nav a.ativo{color:var(--verde);}
-  .hamburguer{
-    display:none;background:none;border:none;color:#fff;
-    font-size:1.8rem;cursor:pointer;line-height:1;
-  }
-  .hero{
-    background:linear-gradient(135deg,var(--azul) 0%,var(--azul-claro) 100%);
-    color:#fff;text-align:center;padding:90px 8%;
-  }
-  .hero h1{font-size:2.6rem;margin-bottom:16px;}
-  .hero p{font-size:1.2rem;max-width:700px;margin:0 auto 32px;opacity:.9;}
-  .btn{
-    display:inline-block;background:var(--verde);color:#fff;padding:14px 36px;
-    border-radius:30px;text-decoration:none;font-weight:600;transition:.2s;
-    border:none;cursor:pointer;font-size:1rem;
-  }
-  .btn:hover{background:#27ae60;transform:translateY(-2px);}
-  section{padding:70px 8%;}
-  section h2{color:var(--azul);font-size:2rem;text-align:center;margin-bottom:40px;}
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;}
-  .card{
-    background:var(--branco);border-radius:14px;padding:32px;
-    box-shadow:0 4px 18px rgba(0,0,0,.07);transition:.2s;
-  }
-  .card:hover{transform:translateY(-6px);box-shadow:0 8px 26px rgba(0,0,0,.12);}
-  .card .icone{font-size:2.4rem;margin-bottom:14px;}
-  .card h3{color:var(--azul);margin-bottom:10px;}
-  .cinza{background:var(--cinza);}
-  .sobre{max-width:800px;margin:0 auto;text-align:center;font-size:1.1rem;}
-  .card-link{display:block;text-decoration:none;color:inherit;cursor:pointer;}
-  .pagina-interna{max-width:820px;margin:0 auto;}
-  .pagina-interna h2{color:var(--azul);font-size:1.9rem;text-align:left;margin-bottom:8px;}
-  .pagina-interna .data{display:block;color:#888;font-size:.9rem;margin-bottom:28px;font-style:italic;}
-  .pagina-interna h3{color:var(--azul);margin:26px 0 8px;font-size:1.15rem;}
-  .pagina-interna p{margin-bottom:14px;text-align:justify;}
-  .voltar{display:inline-block;margin-bottom:30px;color:var(--verde);text-decoration:none;font-weight:600;cursor:pointer;}
-  footer{
-    background:var(--azul);color:#cfd8e3;padding:50px 8% 30px;font-size:.9rem;
-  }
-  .rodape-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px;margin-bottom:36px;}
-  footer h4{color:#fff;margin-bottom:14px;font-size:1rem;}
-  footer a{color:#cfd8e3;text-decoration:none;display:block;margin-bottom:8px;cursor:pointer;}
-  footer a:hover{color:var(--verde);}
-  .rodape-empresa{border-top:1px solid #2a4a6b;padding-top:24px;text-align:center;}
-  .rodape-empresa p{margin-bottom:6px;}
-  .rodape-empresa strong{color:#fff;}
-  @media(max-width:768px){
-    .hero h1{font-size:1.8rem;}
-    .hero{padding:60px 8%;}
-    header{flex-wrap:wrap;}
-    .hamburguer{display:block;}
-    nav{display:none;width:100%;flex-direction:column;padding-top:14px;}
-    nav.aberto{display:flex;}
-    nav a{margin:0;padding:12px 0;border-top:1px solid #2a4a6b;display:block;}
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal do Cliente — Atendimento & Suporte</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0d47a1;
+            --primary-light: #1976d2;
+            --primary-dark: #0a357a;
+            --accent: #00c853;
+            --accent-glow: rgba(0, 200, 83, 0.3);
+            --text: #1a1a2e;
+            --text-light: #4a4a5a;
+            --text-muted: #7a7a8a;
+            --bg: #ffffff;
+            --bg-light: #f8fafc;
+            --bg-dark: #0f172a;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --radius: 16px;
+            --radius-sm: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+            50% { box-shadow: 0 0 0 12px transparent; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .animate { opacity: 0; }
+        .animate.visible {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .animate-left.visible { animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-right.visible { animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            background: linear-gradient(90deg, #0f172a 0%, #1e293b 100%);
+            color: #fff;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1001;
+            flex-wrap: wrap;
+        }
+        .top-bar span { font-weight: 500; letter-spacing: 0.5px; }
+        .top-bar .btn-outline {
+            background: transparent;
+            border: 1.5px solid rgba(255,255,255,0.4);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .top-bar .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #fff;
+            transform: translateY(-1px);
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(226,232,240,0.6);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            box-shadow: var(--shadow);
+            padding: 12px 40px;
+        }
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .logo i { color: var(--accent); font-size: 1.1rem; }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 24px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 30%, #0a357a 70%, #0f172a 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(to top, var(--bg), transparent);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 28px;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        .hero-badge i { color: var(--accent); }
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.6s 0.1s ease forwards;
+            opacity: 0;
+        }
+        .hero h1 span {
+            background: linear-gradient(135deg, #4fc3f7, #00c853);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(255,255,255,0.85);
+            max-width: 600px;
+            margin: 0 auto 36px;
+            line-height: 1.7;
+            animation: fadeInUp 0.6s 0.2s ease forwards;
+            opacity: 0;
+        }
+        .hero .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--accent), #00e676);
+            color: #fff;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,200,83,0.4), 0 0 0 0 var(--accent-glow);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s 0.3s ease forwards, pulse 2s infinite;
+            opacity: 0;
+        }
+        .hero .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(0,200,83,0.5);
+        }
+        .hero .btn-primary i { font-size: 1.1rem; }
+
+        /* Floating elements */
+        .float-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.15;
+            animation: float 6s ease-in-out infinite;
+        }
+        .orb-1 { width: 300px; height: 300px; background: #4fc3f7; top: 10%; left: 10%; animation-delay: 0s; }
+        .orb-2 { width: 250px; height: 250px; background: var(--accent); bottom: 20%; right: 10%; animation-delay: 2s; }
+        .orb-3 { width: 200px; height: 200px; background: #7c4dff; top: 40%; right: 30%; animation-delay: 4s; }
+
+        /* ===== SECTIONS COMMON ===== */
+        section { padding: 100px 24px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+        .section-header h2 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        .section-label {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        /* ===== SERVICES ===== */
+        .services { background: var(--bg-light); }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+        }
+        .service-card {
+            background: var(--bg);
+            border-radius: var(--radius);
+            padding: 40px 32px;
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-light), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: transparent;
+        }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 24px;
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover .service-icon { transform: scale(1.1) rotate(-5deg); }
+        .icon-boleto { background: linear-gradient(135deg, #1565c0, #0d47a1); }
+        .icon-suporte { background: linear-gradient(135deg, #00c853, #00e676); }
+        .icon-cancel { background: linear-gradient(135deg, #ff5252, #d32f2f); }
+        .service-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+        .service-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .service-card ul {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+        .service-card ul li {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            padding: 6px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .service-card ul li i {
+            color: var(--accent);
+            font-size: 0.8rem;
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+        .service-card .btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 14px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-blue {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(13,71,161,0.3);
+        }
+        .btn-blue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(13,71,161,0.4);
+        }
+        .btn-green {
+            background: linear-gradient(135deg, var(--accent), #00e676);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0,200,83,0.3);
+        }
+        .btn-green:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,200,83,0.4);
+        }
+        .btn-red {
+            background: linear-gradient(135deg, #ff5252, #d32f2f);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(211,47,47,0.3);
+        }
+        .btn-red:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(211,47,47,0.4);
+        }
+
+        /* ===== ADVANTAGES ===== */
+        .advantages { background: var(--bg); }
+        .advantages-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .advantages-img {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+        }
+        .advantages-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+        .advantages-img:hover img { transform: scale(1.05); }
+        .advantages-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(13,71,161,0.1), rgba(0,200,83,0.05));
+            pointer-events: none;
+        }
+        .advantages-list { display: flex; flex-direction: column; gap: 28px; }
+        .advantage-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            transition: all 0.3s ease;
+        }
+        .advantage-item:hover {
+            background: var(--bg-light);
+            transform: translateX(8px);
+        }
+        .advantage-icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(13,71,161,0.2);
+        }
+        .advantage-item h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+        .advantage-item p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+        .advantages-cta {
+            margin-top: 32px;
+        }
+        .advantages-cta .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(13,71,161,0.3);
+            transition: all 0.3s ease;
+        }
+        .advantages-cta .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(13,71,161,0.4);
+        }
+
+        /* ===== STEPS ===== */
+        .steps { background: linear-gradient(180deg, var(--bg-light) 0%, var(--bg) 100%); }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            position: relative;
+        }
+        .step-card {
+            text-align: center;
+            padding: 40px 24px;
+            position: relative;
+        }
+        .step-number {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 24px;
+            box-shadow: 0 8px 24px rgba(13,71,161,0.25);
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease;
+        }
+        .step-card:hover .step-number { transform: scale(1.1); }
+        .step-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+        .step-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .step-connector {
+            position: absolute;
+            top: 70px;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-light), var(--accent));
+            opacity: 0.2;
+            z-index: 1;
+        }
+        .steps-cta {
+            text-align: center;
+            margin-top: 48px;
+        }
+        .steps-cta .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: #fff;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(13,71,161,0.3);
+            transition: all 0.3s ease;
+        }
+        .steps-cta .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(13,71,161,0.4);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: linear-gradient(135deg, #0a0e1a, #0f172a);
+            color: #fff;
+            padding: 60px 24px 30px;
+            text-align: center;
+        }
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .footer-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 1.4rem;
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(13,71,161,0.3);
+            animation: float 4s ease-in-out infinite;
+        }
+        .footer h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .footer p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto 24px;
+        }
+        .footer .btn-accent {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--accent), #00e676);
+            color: #fff;
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(0,200,83,0.3);
+            transition: all 0.3s ease;
+            margin-bottom: 40px;
+        }
+        .footer .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,200,83,0.4);
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 24px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-card {
+            background: var(--bg);
+            color: var(--text);
+            max-width: 640px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: var(--radius);
+            padding: 40px;
+            position: relative;
+            box-shadow: var(--shadow-xl);
+            transform: translateY(20px) scale(0.98);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .modal-overlay.active .modal-card {
+            transform: translateY(0) scale(1);
+        }
+        .modal-card h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        .modal-card .modal-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+        .modal-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin: 24px 0 8px;
+            color: var(--text);
+        }
+        .modal-card p,
+        .modal-card li {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            max-width: none;
+            margin: 0 0 12px;
+        }
+        .modal-card ul {
+            padding-left: 20px;
+            margin-bottom: 12px;
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: #fff;
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+        .modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        /* ===== BOTÕES LEGAIS DO RODAPÉ ===== */
+        .footer-legal {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 16px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .footer-legal button {
+            background: transparent;
+            border: 1.5px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.85);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .footer-legal button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .top-bar { padding: 10px 16px; font-size: 0.8rem; gap: 12px; }
+            .navbar { padding: 12px 20px; }
+            .nav-links { display: none; }
+            .mobile-toggle { display: block; }
+            section { padding: 60px 20px; }
+            .advantages-inner { grid-template-columns: 1fr; gap: 40px; }
+            .steps-grid { grid-template-columns: 1fr; gap: 32px; }
+            .step-connector { display: none; }
+            .services-grid { grid-template-columns: 1fr; }
+            .hero { min-height: 70vh; padding: 60px 20px; }
+            .modal-card { padding: 28px 20px; }
+        }
+    </style>
+
+<base target="_blank">
 <base target="_blank">
 </head>
 <body>
 
-<header>
-  <div class="logo" onclick="irPara('inicio')">BRCONDOS<span>.</span></div>
-  <button class="hamburguer" id="btnMenu" aria-label="Abrir menu">☰</button>
-  <nav id="menu">
-    <a onclick="irPara('inicio')" data-menu="inicio">Início</a>
-    <a onclick="irPara('servicos')" data-menu="servicos">Serviços</a>
-    <a onclick="irPara('sobre')" data-menu="sobre">Sobre</a>
-    <a onclick="irPara('contato')" data-menu="contato">Contato</a>
-    <a onclick="irPara('privacidade')" data-menu="privacidade">Política de Privacidade</a>
-    <a onclick="irPara('termos')" data-menu="termos">Termos de Uso</a>
-  </nav>
-</header>
-
-<!-- ============ PÁGINA: INÍCIO ============ -->
-<div class="pagina" id="pag-inicio">
-  <div class="hero" id="inicio">
-    <h1>Crédito direto, simples e transparente</h1>
-    <p>A BRCONDOS é uma Sociedade de Crédito Direto (SCD) autorizada pelo Banco Central do Brasil, dedicada a oferecer soluções financeiras digitais com tecnologia, agilidade e segurança.</p>
-    <a class="btn" onclick="irPara('servicos')">Conheça nossas soluções</a>
-  </div>
-
-  <section id="servicos">
-    <h2>Nossos Serviços</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="icone">💳</div>
-        <h3>Empréstimos Pessoais</h3>
-        <p>Crédito pessoal 100% digital, com análise rápida, taxas transparentes e dinheiro na conta em pouco tempo.</p>
-      </div>
-      <div class="card">
-        <div class="icone">🏦</div>
-        <h3>Crédito Direto</h3>
-        <p>Operações de crédito realizadas diretamente entre a instituição e o cliente, sem intermediários, reduzindo custos.</p>
-      </div>
-      <div class="card">
-        <div class="icone">📱</div>
-        <h3>Plataforma Digital</h3>
-        <p>Solicite, acompanhe e gerencie suas operações de crédito de forma simples, pelo computador ou celular.</p>
-      </div>
-      <div class="card">
-        <div class="icone">🔒</div>
-        <h3>Segurança e Conformidade</h3>
-        <p>Instituição autorizada pelo Banco Central do Brasil, com proteção de dados e conformidade com a legislação vigente.</p>
-      </div>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <span><i class="fas fa-bolt"></i> SOLICITAR ATENDIMENTO RÁPIDO!</span>
+        <a href="https://wa.me/5511949084474?text=Ol%C3%A1%21%20Gostaria%20de%20falar%20com%20um%20especialista." class="btn-outline"><i class="fas fa-headset"></i> FALAR COM ESPECIALISTA</a>
     </div>
-  </section>
 
-  <section class="cinza" id="sobre">
-    <h2>Sobre a BRCONDOS</h2>
-    <p class="sobre">
-      A <strong>BRCONDOS - Sociedade de Crédito Direto S.A.</strong> é uma instituição financeira
-      autorizada pelo Banco Central do Brasil que atua na concessão de crédito de forma
-      direta ao consumidor, utilizando tecnologia de ponta para oferecer uma experiência
-      simples, rápida e transparente. Nossa missão é democratizar o acesso ao crédito
-      com responsabilidade e inovação.
-    </p>
-  </section>
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="#inicio" class="logo" target="_self">
+            <i class="fas fa-wifi"></i>
+            PORTAL DO CLIENTE
+        </a>
+        <ul class="nav-links">
+            <li><a href="#servicos" target="_self">Serviços</a></li>
+            <li><a href="#vantagens" target="_self">Vantagens</a></li>
+            <li><a href="#passoapasso" target="_self">Como Funciona</a></li>
+            <li><a href="#contato" target="_self">Contato</a></li>
+        </ul>
+        <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
 
-  <section id="contato">
-    <h2>Fale Conosco</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="icone">📍</div>
-        <h3>Endereço</h3>
-        <p>Rua Max Colin, 1030, Sala 08<br>América, Joinville - SC<br>CEP 89216-000</p>
-      </div>
-      <div class="card">
-        <div class="icone">🕐</div>
-        <h3>Atendimento</h3>
-        <p>Segunda a sexta-feira<br>das 9h às 18h</p>
-      </div>
-      <a class="card card-link" onclick="irPara('privacidade')">
-        <div class="icone">🔐</div>
-        <h3>Política de Privacidade</h3>
-        <p>Saiba como coletamos, usamos e protegemos seus dados pessoais. Clique para ler o documento completo.</p>
-      </a>
-      <a class="card card-link" onclick="irPara('termos')">
-        <div class="icone">📄</div>
-        <h3>Termos de Uso</h3>
-        <p>Conheça as regras e condições para utilização do nosso site e serviços. Clique para ler o documento completo.</p>
-      </a>
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+        <div class="float-orb orb-1"></div>
+        <div class="float-orb orb-2"></div>
+        <div class="float-orb orb-3"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-circle-check"></i>
+                Atendimento 100% Digital
+            </div>
+            <h1>Portal de <span>Atendimento</span> ao Cliente!</h1>
+            <p>Emita boletos, tire dúvidas, soluções rápidas e eficazes para problemas de conexão, configuração e desempenho da sua rede. Tudo direto no seu celular.</p>
+            <a href="https://wa.me/5511949084474?text=Ol%C3%A1%21%20Vim%20pelo%20Portal%20do%20Cliente%20e%20gostaria%20de%20solicitar%20atendimento." class="btn-primary">
+                <i class="fas fa-comment-dots"></i>
+                SOLICITAR ATENDIMENTO
+            </a>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="servicos">
+        <div class="container">
+            <div class="section-header animate">
+                <span class="section-label">Nossos Serviços</span>
+                <h2>Tudo o que você precisa saber para usar nossos serviços da melhor forma!</h2>
+                <p>Escolha a opção que melhor atende à sua necessidade e resolva em minutos.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card animate delay-1">
+                    <div class="service-icon icon-boleto"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <h3>Emitir 2ª Via Atualizada</h3>
+                    <p>Peça a segunda via do seu boleto e receba os dados para pagamento no suporte digital.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Receba a via atualizada</li>
+                        <li><i class="fas fa-check-circle"></i> Dados inclusos para pagamento</li>
+                        <li><i class="fas fa-check-circle"></i> Suporte rápido</li>
+                    </ul>
+                    <a href="https://wa.me/5511949084474?text=Ol%C3%A1%21%20Preciso%20da%202%C2%AA%20via%20do%20meu%20boleto%20atualizado." class="btn btn-blue">EMITIR 2ª VIA</a>
+                </div>
+                <div class="service-card animate delay-2">
+                    <div class="service-icon icon-suporte"><i class="fas fa-screwdriver-wrench"></i></div>
+                    <h3>Suporte Técnico</h3>
+                    <p>Verifique pelo suporte a solução rápida para seu problema com a internet, entre em contato.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Verificação de condições</li>
+                        <li><i class="fas fa-check-circle"></i> Alternativas apresentadas no suporte</li>
+                        <li><i class="fas fa-check-circle"></i> Procedimento online</li>
+                    </ul>
+                    <a href="https://wa.me/5511949084474?text=Ol%C3%A1%21%20Estou%20com%20problema%20na%20minha%20conex%C3%A3o%20e%20preciso%20de%20suporte%20t%C3%A9cnico." class="btn btn-green">SOLICITAR SUPORTE</a>
+                </div>
+                <div class="service-card animate delay-3">
+                    <div class="service-icon icon-cancel"><i class="fas fa-user-xmark"></i></div>
+                    <h3>Cancelamento</h3>
+                    <p>Solicite o cancelamento quando quiser, suporte online disponível para cancelamento.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Atendimento exclusivo</li>
+                        <li><i class="fas fa-check-circle"></i> Instruções no suporte</li>
+                        <li><i class="fas fa-check-circle"></i> Atendimento sigiloso para você</li>
+                    </ul>
+                    <a href="https://wa.me/5511949084474?text=Ol%C3%A1%21%20Gostaria%20de%20solicitar%20o%20cancelamento%20do%20meu%20servi%C3%A7o." class="btn btn-red">CANCELAMENTO IMEDIATO</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADVANTAGES -->
+    <section class="advantages" id="vantagens">
+        <div class="container">
+            <div class="advantages-inner">
+                <div class="advantages-img animate-left">
+                    <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=600&h=700&fit=crop&crop=faces" alt="Mulher sorrindo usando fones de ouvido e celular">
+                </div>
+                <div class="advantages-content">
+                    <div class="section-header animate" style="text-align:left; margin:0 0 40px 0;">
+                        <span class="section-label">Diferenciais</span>
+                        <h2>Vantagens da nossa Plataforma</h2>
+                        <p>Facilidades pensadas para o seu dia a dia!</p>
+                    </div>
+                    <div class="advantages-list">
+                        <div class="advantage-item animate delay-1">
+                            <div class="advantage-icon"><i class="fas fa-heart"></i></div>
+                            <div>
+                                <h4>Suporte Humanizado</h4>
+                                <p>Um canal digital pensado para guiar sua demanda com objetividade e transparência.</p>
+                            </div>
+                        </div>
+                        <div class="advantage-item animate delay-2">
+                            <div class="advantage-icon"><i class="fas fa-shield-halved"></i></div>
+                            <div>
+                                <h4>Dados Protegidos</h4>
+                                <p>As informações compartilhadas no suporte seguem as diretrizes vigentes e a política de privacidade.</p>
+                            </div>
+                        </div>
+                        <div class="advantage-item animate delay-3">
+                            <div class="advantage-icon"><i class="fas fa-bolt"></i></div>
+                            <div>
+                                <h4>Rapidez no Processo</h4>
+                                <p>Faça suas solicitações pelo celular, sem precisar se deslocar até um local físico.</p>
+                            </div>
+                        </div>
+                        <div class="advantage-item animate delay-4">
+                            <div class="advantage-icon"><i class="fas fa-mobile-screen"></i></div>
+                            <div>
+                                <h4>Acesso Direto e Fácil</h4>
+                                <p>Inicie sua demanda quando quiser e receba retorno de acordo com a disponibilidade da equipe.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="advantages-cta animate delay-5">
+                        <a href="https://wa.me/5511949084474?text=Ol%C3%A1%21%20Vim%20pelo%20Portal%20do%20Cliente%20e%20gostaria%20de%20solicitar%20atendimento." class="btn-primary"><i class="fas fa-comment-dots"></i> SOLICITAR ATENDIMENTO</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEPS -->
+    <section class="steps" id="passoapasso">
+        <div class="container">
+            <div class="section-header animate">
+                <span class="section-label">Processo</span>
+                <h2>Passo a Passo</h2>
+                <p>Três etapas rápidas para ser atendido</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-connector"></div>
+                <div class="step-card animate delay-1">
+                    <div class="step-number">1</div>
+                    <h3>Abra o Chat</h3>
+                    <p>Toque no botão <strong>SOLICITAR ATENDIMENTO</strong> e inicie a conversa com nosso canal de suporte digital.</p>
+                </div>
+                <div class="step-card animate delay-2">
+                    <div class="step-number">2</div>
+                    <h3>Descreva o Que Precisa</h3>
+                    <p>Diga se quer segunda via do boleto, solicitar atendimento para resolver problemas com sua internet ou cancelamento.</p>
+                </div>
+                <div class="step-card animate delay-3">
+                    <div class="step-number">3</div>
+                    <h3>Receba o Retorno</h3>
+                    <p>A equipe envia as orientações e dados conforme o que foi solicitado.</p>
+                </div>
+            </div>
+            <div class="steps-cta animate">
+                <a href="https://wa.me/5511949084474?text=Ol%C3%A1%21%20Vim%20pelo%20Portal%20do%20Cliente%20e%20gostaria%20de%20solicitar%20atendimento." class="btn-primary"><i class="fas fa-paper-plane"></i> SOLICITAR ATENDIMENTO</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="contato">
+        <div class="footer-content">
+            <div class="footer-icon"><i class="fas fa-headset"></i></div>
+            <h3>Precisa de Ajuda?</h3>
+            <p>Sinta-se à vontade para entrar em contato conosco se tiver algum problema. Nossa equipe de suporte está disponível <strong>24 horas por dia, 7 dias por semana</strong>.</p>
+            <a href="https://wa.me/5511949084474?text=Ol%C3%A1%21%20Preciso%20de%20ajuda.%20Vim%20pelo%20Portal%20do%20Cliente." class="btn-accent">
+                <i class="fas fa-comment-dots"></i>
+                INICIAR ATENDIMENTO
+            </a>
+            <div class="footer-legal">
+                <button onclick="openModal('privacy')"><i class="fas fa-lock" style="margin-right:6px;"></i>Política de Privacidade</button>
+                <button onclick="openModal('terms')"><i class="fas fa-file-contract" style="margin-right:6px;"></i>Termos de Uso</button>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 Portal do Cliente. Todos os direitos reservados.</p>
+                <p>CNPJ: 49.933.388/0001-72</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modalContent"></div>
+        </div>
     </div>
-  </section>
-</div>
 
-<!-- ============ PÁGINA: POLÍTICA DE PRIVACIDADE ============ -->
-<div class="pagina" id="pag-privacidade" style="display:none;">
-  <section>
-    <div class="pagina-interna">
-      <a class="voltar" onclick="irPara('inicio')">← Voltar ao início</a>
-      <h2>Política de Privacidade</h2>
-      <span class="data">Última atualização: setembro de 2026</span>
-      <h3>1. Introdução</h3>
-      <p>A BRCONDOS - Sociedade de Crédito Direto S.A. ("BRCONDOS"), CNPJ 49.933.388/0001-72, com sede em Rua Max Colin, 1030, Sala 08, América, Joinville - SC, CEP 89216-000, respeita a privacidade de seus usuários e está comprometida com a proteção dos dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD).</p>
-      <h3>2. Dados Coletados</h3>
-      <p>Coletamos dados pessoais fornecidos diretamente pelo usuário, como nome, CPF, data de nascimento, endereço, telefone e e-mail, bem como dados de navegação e informações necessárias à análise de crédito, quando aplicável.</p>
-      <h3>3. Finalidade do Tratamento</h3>
-      <p>Os dados são utilizados para: (i) identificação e cadastro do usuário; (ii) análise e concessão de crédito; (iii) prevenção a fraudes; (iv) cumprimento de obrigações legais e regulatórias perante o Banco Central do Brasil; e (v) melhoria dos nossos serviços.</p>
-      <h3>4. Compartilhamento de Dados</h3>
-      <p>O compartilhamento de dados ocorre apenas quando necessário, com operadores contratados sob sigilo, órgãos reguladores e autoridades competentes, ou mediante consentimento do titular.</p>
-      <h3>5. Segurança</h3>
-      <p>Adotamos medidas técnicas e administrativas adequadas para proteger os dados pessoais contra acessos não autorizados, perda, alteração ou divulgação indevida.</p>
-      <h3>6. Direitos do Titular</h3>
-      <p>O titular dos dados pode, a qualquer momento, solicitar a confirmação, o acesso, a correção, a anonimização, a portabilidade ou a eliminação de seus dados pessoais, bem como revogar o consentimento concedido.</p>
-      <h3>7. Encarregado de Dados (DPO)</h3>
-      <p>Para exercer seus direitos ou esclarecer dúvidas sobre esta política, entre em contato com nosso Encarregado de Proteção de Dados pelo endereço: Rua Max Colin, 1030, Sala 08, América, Joinville - SC, CEP 89216-000.</p>
-      <h3>8. Alterações</h3>
-      <p>Esta Política de Privacidade poderá ser atualizada periodicamente. Recomendamos a leitura regular desta página.</p>
-      <a class="voltar" style="margin-top:20px;" onclick="irPara('inicio')">← Voltar ao início</a>
-    </div>
-  </section>
-</div>
+    <script>
+        // Scroll animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
 
-<!-- ============ PÁGINA: TERMOS DE USO ============ -->
-<div class="pagina" id="pag-termos" style="display:none;">
-  <section>
-    <div class="pagina-interna">
-      <a class="voltar" onclick="irPara('inicio')">← Voltar ao início</a>
-      <h2>Termos de Uso</h2>
-      <span class="data">Última atualização: setembro de 2026</span>
-      <h3>1. Aceitação</h3>
-      <p>Ao acessar e utilizar o site da BRCONDOS - Sociedade de Crédito Direto S.A., CNPJ 49.933.388/0001-72, o usuário declara ter lido, compreendido e aceitado integralmente estes Termos de Uso.</p>
-      <h3>2. Objeto</h3>
-      <p>Estes termos regulam o acesso, a navegação e a utilização do site, bem como as informações e serviços disponibilizados pela BRCONDOS, instituição autorizada pelo Banco Central do Brasil a operar como Sociedade de Crédito Direto.</p>
-      <h3>3. Serviços</h3>
-      <p>A BRCONDOS oferece serviços de concessão de crédito direto ao consumidor, mediante análise de perfil e aprovação conforme políticas internas e regulamentação aplicável. A disponibilização de crédito não é garantida.</p>
-      <h3>4. Responsabilidades do Usuário</h3>
-      <p>O usuário se compromete a fornecer informações verdadeiras, exatas e atualizadas, sendo responsável por qualquer dano decorrente de informações incorretas ou fraudulentas.</p>
-      <h3>5. Propriedade Intelectual</h3>
-      <p>Todo o conteúdo do site (textos, marcas, logotipos, imagens e layout) é de propriedade da BRCONDOS ou licenciado a ela, sendo vedada sua reprodução sem autorização prévia.</p>
-      <h3>6. Limitação de Responsabilidade</h3>
-      <p>A BRCONDOS não se responsabiliza por indisponibilidades temporárias do site, nem por decisões de crédito que resultem em negativa de operações, as quais seguem critérios objetivos de análise.</p>
-      <h3>7. Legislação Aplicável</h3>
-      <p>Estes termos são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da Comarca de Joinville - SC para dirimir quaisquer controvérsias decorrentes deste documento.</p>
-      <h3>8. Contato</h3>
-      <p>Em caso de dúvidas sobre estes Termos de Uso, entre em contato: Rua Max Colin, 1030, Sala 08, América, Joinville - SC, CEP 89216-000.</p>
-      <a class="voltar" style="margin-top:20px;" onclick="irPara('inicio')">← Voltar ao início</a>
-    </div>
-  </section>
-</div>
+        document.querySelectorAll('.animate, .animate-left, .animate-right').forEach(el => observer.observe(el));
 
-<footer>
-  <div class="rodape-grid">
-    <div>
-      <h4>BRCONDOS</h4>
-      <p>Sociedade de Crédito Direto S.A., autorizada pelo Banco Central do Brasil, dedicada a soluções de crédito digitais.</p>
-    </div>
-    <div>
-      <h4>Institucional</h4>
-      <a onclick="irPara('sobre')">Sobre nós</a>
-      <a onclick="irPara('privacidade')">Política de Privacidade</a>
-      <a onclick="irPara('termos')">Termos de Uso</a>
-    </div>
-    <div>
-      <h4>Endereço</h4>
-      <p>Rua Max Colin, 1030, Sala 08<br>América, Joinville - SC<br>CEP 89216-000</p>
-    </div>
-  </div>
-  <div class="rodape-empresa">
-    <p><strong>BRCONDOS SOCIEDADE DE CRÉDITO DIRETO S.A.</strong></p>
-    <p>CNPJ: 49.933.388/0001-72</p>
-    <p>Rua Max Colin, 1030, Sala 08 - América, Joinville - SC - CEP 89216-000</p>
-    <p style="margin-top:14px;opacity:.7;">© 2026 BRCONDOS. Todos os direitos reservados.</p>
-  </div>
-</footer>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
 
-<script>
-var btnMenu = document.getElementById('btnMenu');
-var menu = document.getElementById('menu');
-btnMenu.addEventListener('click', function(){
-  menu.classList.toggle('aberto');
-  btnMenu.textContent = menu.classList.contains('aberto') ? '✕' : '☰';
-});
+        /* ===== MODAL ===== */
+        const modalContent = {
+            privacy: `
+                <span class="modal-tag">Privacidade</span>
+                <h2>Política de Privacidade</h2>
+                <p><strong>Última atualização:</strong> 09 de setembro de 2026</p>
 
-function irPara(destino){
-  var docs = { 'privacidade':'pag-privacidade', 'termos':'pag-termos' };
-  var paginas = document.querySelectorAll('.pagina');
-  if(docs[destino]){
-    paginas.forEach(function(p){ p.style.display = 'none'; });
-    document.getElementById(docs[destino]).style.display = 'block';
-    window.scrollTo({top:0, behavior:'smooth'});
-  } else {
-    document.getElementById('pag-inicio').style.display = 'block';
-    document.getElementById('pag-privacidade').style.display = 'none';
-    document.getElementById('pag-termos').style.display = 'none';
-    var alvo = document.getElementById(destino);
-    if(alvo){
-      setTimeout(function(){ alvo.scrollIntoView({behavior:'smooth'}); }, 50);
-    }
-  }
-  document.querySelectorAll('nav a').forEach(function(a){
-    a.classList.toggle('ativo', a.getAttribute('data-menu') === destino);
-  });
-  menu.classList.remove('aberto');
-  btnMenu.textContent = '☰';
-}
-</script>
+                <h3>1. Coleta de Dados</h3>
+                <p>Coletamos apenas as informações necessárias para prestar o atendimento solicitado, como nome, telefone, dados do contrato e o conteúdo da sua solicitação.</p>
 
+                <h3>2. Uso das Informações</h3>
+                <p>As informações são utilizadas exclusivamente para:</p>
+                <ul>
+                    <li>Processar suas solicitações de atendimento;</li>
+                    <li>Emitir segunda via de boletos;</li>
+                    <li>Prestar suporte técnico;</li>
+                    <li>Processar solicitações de cancelamento;</li>
+                    <li>Cumprir obrigações legais.</li>
+                </ul>
+
+                <h3>3. Proteção dos Dados</h3>
+                <p>Adotamos medidas de segurança técnicas e administrativas para proteger seus dados contra acessos não autorizados, vazamentos ou qualquer forma de tratamento inadequado.</p>
+
+                <h3>4. Seus Direitos</h3>
+                <p>Nos termos da Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018), você pode solicitar a confirmação, o acesso, a correção, a anonimização ou a eliminação dos seus dados pessoais a qualquer momento pelo nosso canal de atendimento.</p>
+
+                <h3>5. Compartilhamento</h3>
+                <p>Não vendemos, alugamos ou comercializamos seus dados pessoais. O compartilhamento ocorre apenas quando estritamente necessário para a execução do serviço contratado ou por determinação legal.</p>
+
+                <h3>6. Alterações</h3>
+                <p>Esta política pode ser atualizada periodicamente. Recomendamos a revisão regular desta página para se manter informado sobre como protegemos suas informações.</p>
+            `,
+            terms: `
+                <span class="modal-tag">Termos</span>
+                <h2>Termos de Uso</h2>
+                <p><strong>Última atualização:</strong> 09 de setembro de 2026</p>
+
+                <h3>1. Aceitação</h3>
+                <p>Ao utilizar este portal de atendimento, você concorda com estes termos e condições de uso. Caso não concorde, por favor, não utilize os serviços disponibilizados.</p>
+
+                <h3>2. Serviços Oferecidos</h3>
+                <p>O portal disponibiliza canais digitais para:</p>
+                <ul>
+                    <li>Solicitação de 2ª via de boleto atualizada;</li>
+                    <li>Atendimento de suporte técnico;</li>
+                    <li>Solicitação de cancelamento de serviços.</li>
+                </ul>
+
+                <h3>3. Responsabilidades do Usuário</h3>
+                <p>Você se compromete a fornecer informações verdadeiras e precisas, além de manter seus dados cadastrais atualizados. O uso indevido do portal pode resultar na recusa ou suspensão do atendimento.</p>
+
+                <h3>4. Disponibilidade do Serviço</h3>
+                <p>Nos esforçamos para manter o portal disponível 24 horas por dia, 7 dias por semana, mas não garantimos funcionamento ininterrupto ou livre de erros, podendo haver interrupções para manutenção ou por motivos de força maior.</p>
+
+                <h3>5. Atendimento via WhatsApp</h3>
+                <p>Ao clicar nos botões de atendimento, você será redirecionado ao WhatsApp, plataforma de terceiros, ficando sujeito também aos termos de uso da mesma.</p>
+
+                <h3>6. Limitação de Responsabilidade</h3>
+                <p>Não nos responsabilizamos por falhas de conectividade do usuário, informações incorretas fornecidas pelo próprio usuário ou por danos decorrentes do uso inadequado do portal.</p>
+
+                <h3>7. Alterações dos Termos</h3>
+                <p>Estes termos podem ser alterados a qualquer momento. O uso continuado do portal após as alterações constitui aceitação dos novos termos.</p>
+            `
+        };
+
+        function openModal(type) {
+            const overlay = document.getElementById('modalOverlay');
+            const content = document.getElementById('modalContent');
+            content.innerHTML = modalContent[type];
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            if (!event || event.target.id === 'modalOverlay') {
+                document.getElementById('modalOverlay').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        /* ===== ÂNCORAS SEMPRE NA MESMA GUIA ===== */
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.setAttribute('target', '_self');
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const id = this.getAttribute('href');
+                if (id.length > 1) {
+                    const target = document.querySelector(id);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
 </body>
 </html>
