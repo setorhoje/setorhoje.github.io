@@ -1,1148 +1,738 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal do Cliente — Atendimento & Suporte</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        :root {
-            --primary: #0d47a1;
-            --primary-light: #1976d2;
-            --primary-dark: #0a357a;
-            --accent: #00c853;
-            --accent-glow: rgba(0, 200, 83, 0.3);
-            --text: #1a1a2e;
-            --text-light: #4a4a5a;
-            --text-muted: #7a7a8a;
-            --bg: #ffffff;
-            --bg-light: #f8fafc;
-            --bg-dark: #0f172a;
-            --border: #e2e8f0;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-            --radius: 16px;
-            --radius-sm: 8px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BRCONDOS Sociedade de Crédito Direto S.A. - informações institucionais, serviços, política de privacidade e termos de uso.">
+  <meta name="robots" content="index, follow">
+  <title>BRCONDOS Sociedade de Crédito Direto S.A.</title>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--text);
-            background: var(--bg);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #1f2937;
+      background: #f8fafc;
+      line-height: 1.6;
+    }
 
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-60px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(60px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
-            50% { box-shadow: 0 0 0 12px transparent; }
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
+    header {
+      background: #0b1f3a;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,.15);
+    }
 
-        .animate { opacity: 0; }
-        .animate.visible {
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        .animate-left.visible { animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .animate-right.visible { animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
-        .delay-5 { animation-delay: 0.5s; }
+    .container {
+      width: 90%;
+      max-width: 1180px;
+      margin: auto;
+    }
 
-        /* ===== TOP BAR ===== */
-        .top-bar {
-            background: linear-gradient(90deg, #0f172a 0%, #1e293b 100%);
-            color: #fff;
-            padding: 12px 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            font-size: 0.9rem;
-            position: relative;
-            z-index: 1001;
-            flex-wrap: wrap;
-        }
-        .top-bar span { font-weight: 500; letter-spacing: 0.5px; }
-        .top-bar .btn-outline {
-            background: transparent;
-            border: 1.5px solid rgba(255,255,255,0.4);
-            color: #fff;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .top-bar .btn-outline:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: #fff;
-            transform: translateY(-1px);
-        }
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
 
-        /* ===== NAVBAR ===== */
-        .navbar {
-            position: sticky;
-            top: 0;
-            background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid rgba(226,232,240,0.6);
-            padding: 16px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-        .navbar.scrolled {
-            box-shadow: var(--shadow);
-            padding: 12px 40px;
-        }
-        .logo {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-        .logo i { color: var(--accent); font-size: 1.1rem; }
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-light);
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-        .nav-links a:hover { color: var(--primary); }
-        .nav-links a:hover::after { width: 100%; }
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
 
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.4rem;
-            color: var(--text);
-            cursor: pointer;
-        }
+    .logo span {
+      color: #28a9e0;
+    }
 
-        /* ===== HERO ===== */
-        .hero {
-            position: relative;
-            min-height: 85vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 80px 24px;
-            overflow: hidden;
-            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 30%, #0a357a 70%, #0f172a 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
-        }
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            right: 0;
-            height: 120px;
-            background: linear-gradient(to top, var(--bg), transparent);
-        }
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-        }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255,255,255,0.12);
-            border: 1px solid rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            padding: 8px 20px;
-            border-radius: 50px;
-            color: #fff;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-bottom: 28px;
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        .hero-badge i { color: var(--accent); }
-        .hero h1 {
-            font-size: clamp(2.2rem, 5vw, 3.8rem);
-            font-weight: 800;
-            color: #fff;
-            line-height: 1.15;
-            margin-bottom: 24px;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.2);
-            animation: fadeInUp 0.6s 0.1s ease forwards;
-            opacity: 0;
-        }
-        .hero h1 span {
-            background: linear-gradient(135deg, #4fc3f7, #00c853);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .hero p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: rgba(255,255,255,0.85);
-            max-width: 600px;
-            margin: 0 auto 36px;
-            line-height: 1.7;
-            animation: fadeInUp 0.6s 0.2s ease forwards;
-            opacity: 0;
-        }
-        .hero .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--accent), #00e676);
-            color: #fff;
-            padding: 16px 40px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0,200,83,0.4), 0 0 0 0 var(--accent-glow);
-            transition: all 0.3s ease;
-            animation: fadeInUp 0.6s 0.3s ease forwards, pulse 2s infinite;
-            opacity: 0;
-        }
-        .hero .btn-primary:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 30px rgba(0,200,83,0.5);
-        }
-        .hero .btn-primary i { font-size: 1.1rem; }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
 
-        /* Floating elements */
-        .float-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.15;
-            animation: float 6s ease-in-out infinite;
-        }
-        .orb-1 { width: 300px; height: 300px; background: #4fc3f7; top: 10%; left: 10%; animation-delay: 0s; }
-        .orb-2 { width: 250px; height: 250px; background: var(--accent); bottom: 20%; right: 10%; animation-delay: 2s; }
-        .orb-3 { width: 200px; height: 200px; background: #7c4dff; top: 40%; right: 30%; animation-delay: 4s; }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
 
-        /* ===== SECTIONS COMMON ===== */
-        section { padding: 100px 24px; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .section-header {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto 60px;
-        }
-        .section-header h2 {
-            font-size: clamp(1.8rem, 4vw, 2.6rem);
-            font-weight: 800;
-            color: var(--text);
-            margin-bottom: 16px;
-            line-height: 1.2;
-        }
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-        .section-label {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            color: #fff;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
-        }
+    nav a:hover {
+      color: #28a9e0;
+    }
 
-        /* ===== SERVICES ===== */
-        .services { background: var(--bg-light); }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 28px;
-        }
-        .service-card {
-            background: var(--bg);
-            border-radius: var(--radius);
-            padding: 40px 32px;
-            border: 1px solid var(--border);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-light), var(--accent));
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
-            border-color: transparent;
-        }
-        .service-card:hover::before { transform: scaleX(1); }
-        .service-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            color: #fff;
-            margin-bottom: 24px;
-            transition: transform 0.3s ease;
-        }
-        .service-card:hover .service-icon { transform: scale(1.1) rotate(-5deg); }
-        .icon-boleto { background: linear-gradient(135deg, #1565c0, #0d47a1); }
-        .icon-suporte { background: linear-gradient(135deg, #00c853, #00e676); }
-        .icon-cancel { background: linear-gradient(135deg, #ff5252, #d32f2f); }
-        .service-card h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--text);
-        }
-        .service-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        .service-card ul {
-            list-style: none;
-            margin-bottom: 28px;
-        }
-        .service-card ul li {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            padding: 6px 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-        .service-card ul li i {
-            color: var(--accent);
-            font-size: 0.8rem;
-            margin-top: 4px;
-            flex-shrink: 0;
-        }
-        .service-card .btn {
-            display: block;
-            width: 100%;
-            text-align: center;
-            padding: 14px;
-            border-radius: var(--radius-sm);
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-blue {
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(13,71,161,0.3);
-        }
-        .btn-blue:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(13,71,161,0.4);
-        }
-        .btn-green {
-            background: linear-gradient(135deg, var(--accent), #00e676);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(0,200,83,0.3);
-        }
-        .btn-green:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,200,83,0.4);
-        }
-        .btn-red {
-            background: linear-gradient(135deg, #ff5252, #d32f2f);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(211,47,47,0.3);
-        }
-        .btn-red:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(211,47,47,0.4);
-        }
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(11,31,58,.96), rgba(18,67,108,.90)),
+        linear-gradient(45deg, #0b1f3a, #1677a8);
+      color: white;
+      padding: 110px 0;
+    }
 
-        /* ===== ADVANTAGES ===== */
-        .advantages { background: var(--bg); }
-        .advantages-inner {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        .advantages-img {
-            position: relative;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-xl);
-        }
-        .advantages-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.6s ease;
-        }
-        .advantages-img:hover img { transform: scale(1.05); }
-        .advantages-img::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(13,71,161,0.1), rgba(0,200,83,0.05));
-            pointer-events: none;
-        }
-        .advantages-list { display: flex; flex-direction: column; gap: 28px; }
-        .advantage-item {
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-            padding: 20px;
-            border-radius: var(--radius-sm);
-            transition: all 0.3s ease;
-        }
-        .advantage-item:hover {
-            background: var(--bg-light);
-            transform: translateX(8px);
-        }
-        .advantage-icon {
-            width: 48px;
-            height: 48px;
-            min-width: 48px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 12px rgba(13,71,161,0.2);
-        }
-        .advantage-item h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: var(--text);
-        }
-        .advantage-item p {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            line-height: 1.5;
-        }
-        .advantages-cta {
-            margin-top: 32px;
-        }
-        .advantages-cta .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            color: #fff;
-            padding: 14px 32px;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            box-shadow: 0 4px 20px rgba(13,71,161,0.3);
-            transition: all 0.3s ease;
-        }
-        .advantages-cta .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(13,71,161,0.4);
-        }
+    .hero-content {
+      max-width: 760px;
+    }
 
-        /* ===== STEPS ===== */
-        .steps { background: linear-gradient(180deg, var(--bg-light) 0%, var(--bg) 100%); }
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            position: relative;
-        }
-        .step-card {
-            text-align: center;
-            padding: 40px 24px;
-            position: relative;
-        }
-        .step-number {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin: 0 auto 24px;
-            box-shadow: 0 8px 24px rgba(13,71,161,0.25);
-            position: relative;
-            z-index: 2;
-            transition: transform 0.3s ease;
-        }
-        .step-card:hover .step-number { transform: scale(1.1); }
-        .step-card h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--text);
-        }
-        .step-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        .step-connector {
-            position: absolute;
-            top: 70px;
-            left: 20%;
-            right: 20%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary-light), var(--accent));
-            opacity: 0.2;
-            z-index: 1;
-        }
-        .steps-cta {
-            text-align: center;
-            margin-top: 48px;
-        }
-        .steps-cta .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            color: #fff;
-            padding: 16px 40px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
-            text-decoration: none;
-            box-shadow: 0 4px 20px rgba(13,71,161,0.3);
-            transition: all 0.3s ease;
-        }
-        .steps-cta .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(13,71,161,0.4);
-        }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 62px);
+      line-height: 1.08;
+      margin-bottom: 25px;
+    }
 
-        /* ===== FOOTER ===== */
-        .footer {
-            background: linear-gradient(135deg, #0a0e1a, #0f172a);
-            color: #fff;
-            padding: 60px 24px 30px;
-            text-align: center;
-        }
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .footer-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-            font-size: 1.4rem;
-            color: #fff;
-            box-shadow: 0 8px 24px rgba(13,71,161,0.3);
-            animation: float 4s ease-in-out infinite;
-        }
-        .footer h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-        .footer p {
-            color: rgba(255,255,255,0.7);
-            font-size: 1rem;
-            line-height: 1.7;
-            max-width: 600px;
-            margin: 0 auto 24px;
-        }
-        .footer .btn-accent {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--accent), #00e676);
-            color: #fff;
-            padding: 14px 36px;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            box-shadow: 0 4px 20px rgba(0,200,83,0.3);
-            transition: all 0.3s ease;
-            margin-bottom: 40px;
-        }
-        .footer .btn-accent:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0,200,83,0.4);
-        }
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding-top: 24px;
-            margin-top: 20px;
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.4);
-        }
+    .hero h1 span {
+      color: #36b8ec;
+    }
 
-        /* ===== MODAL ===== */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.75);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .modal-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
-        .modal-card {
-            background: var(--bg);
-            color: var(--text);
-            max-width: 640px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            border-radius: var(--radius);
-            padding: 40px;
-            position: relative;
-            box-shadow: var(--shadow-xl);
-            transform: translateY(20px) scale(0.98);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .modal-overlay.active .modal-card {
-            transform: translateY(0) scale(1);
-        }
-        .modal-card h2 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            color: var(--text);
-        }
-        .modal-card .modal-tag {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            color: #fff;
-            padding: 4px 14px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
-        }
-        .modal-card h3 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin: 24px 0 8px;
-            color: var(--text);
-        }
-        .modal-card p,
-        .modal-card li {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            line-height: 1.7;
-            max-width: none;
-            margin: 0 0 12px;
-        }
-        .modal-card ul {
-            padding-left: 20px;
-            margin-bottom: 12px;
-        }
-        .modal-close {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: none;
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            color: #fff;
-            font-size: 1.4rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            line-height: 1;
-        }
-        .modal-close:hover {
-            transform: rotate(90deg);
-        }
+    .hero p {
+      font-size: 20px;
+      color: #e5edf5;
+      margin-bottom: 35px;
+    }
 
-        /* ===== BOTÕES LEGAIS DO RODAPÉ ===== */
-        .footer-legal {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-top: 16px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-        .footer-legal button {
-            background: transparent;
-            border: 1.5px solid rgba(255,255,255,0.3);
-            color: rgba(255,255,255,0.85);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-        .footer-legal button:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-1px);
-        }
+    .btn {
+      display: inline-block;
+      padding: 14px 25px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: bold;
+      background: #28a9e0;
+      color: white;
+      transition: .2s;
+    }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .top-bar { padding: 10px 16px; font-size: 0.8rem; gap: 12px; }
-            .navbar { padding: 12px 20px; }
-            .nav-links { display: none; }
-            .mobile-toggle { display: block; }
-            section { padding: 60px 20px; }
-            .advantages-inner { grid-template-columns: 1fr; gap: 40px; }
-            .steps-grid { grid-template-columns: 1fr; gap: 32px; }
-            .step-connector { display: none; }
-            .services-grid { grid-template-columns: 1fr; }
-            .hero { min-height: 70vh; padding: 60px 20px; }
-            .modal-card { padding: 28px 20px; }
-        }
-    </style>
+    .btn:hover {
+      background: #168fc4;
+      transform: translateY(-1px);
+    }
 
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      color: #0b1f3a;
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    .section-title p {
+      color: #64748b;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .about {
+      background: white;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .about h3 {
+      font-size: 28px;
+      color: #0b1f3a;
+      margin-bottom: 18px;
+    }
+
+    .about p {
+      margin-bottom: 15px;
+      color: #475569;
+    }
+
+    .info-box {
+      background: #f1f7fb;
+      border-left: 5px solid #28a9e0;
+      padding: 30px;
+      border-radius: 8px;
+    }
+
+    .info-box div {
+      margin-bottom: 15px;
+    }
+
+    .info-box div:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-box strong {
+      display: block;
+      color: #0b1f3a;
+      margin-bottom: 3px;
+    }
+
+    .services {
+      background: #f8fafc;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      padding: 35px 28px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(15,23,42,.07);
+      border: 1px solid #e5e7eb;
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e8f6fc;
+      color: #1597cc;
+      font-size: 25px;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      color: #0b1f3a;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #64748b;
+    }
+
+    .legal {
+      background: white;
+    }
+
+    .legal-content {
+      max-width: 950px;
+      margin: auto;
+    }
+
+    .legal-box {
+      margin-bottom: 35px;
+    }
+
+    .legal-box h3 {
+      color: #0b1f3a;
+      margin-bottom: 12px;
+      font-size: 22px;
+    }
+
+    .legal-box p,
+    .legal-box li {
+      color: #475569;
+      margin-bottom: 10px;
+    }
+
+    .legal-box ul {
+      padding-left: 25px;
+    }
+
+    .contact {
+      background: #0b1f3a;
+      color: white;
+    }
+
+    .contact .section-title h2 {
+      color: white;
+    }
+
+    .contact .section-title p {
+      color: #cbd5e1;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .contact-card {
+      background: rgba(255,255,255,.07);
+      padding: 30px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.1);
+    }
+
+    .contact-card h3 {
+      color: #36b8ec;
+      margin-bottom: 12px;
+    }
+
+    .contact-card p {
+      color: #e2e8f0;
+    }
+
+    footer {
+      background: #071426;
+      color: #cbd5e1;
+      padding: 35px 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 35px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    footer h3 {
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    footer p,
+    footer li {
+      font-size: 14px;
+      margin-bottom: 7px;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer a {
+      color: #cbd5e1;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #36b8ec;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 25px;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    @media (max-width: 800px) {
+      .nav {
+        flex-direction: column;
+        padding: 18px 0;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .hero {
+        padding: 75px 0;
+      }
+
+      .about-grid,
+      .cards,
+      .contact-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <!-- TOP BAR -->
-    <div class="top-bar">
-        <span><i class="fas fa-bolt"></i> SOLICITAR ATENDIMENTO RÁPIDO!</span>
-        <a href="https://wa.me/5511969421450?text=Ol%C3%A1%21%20Gostaria%20de%20falar%20com%20um%20especialista." class="btn-outline"><i class="fas fa-headset"></i> FALAR COM ESPECIALISTA</a>
-    </div>
+<header>
+  <div class="container nav">
+    <div class="logo">BR<span>CONDOS</span></div>
 
-    <!-- NAVBAR -->
-    <nav class="navbar" id="navbar">
-        <a href="#inicio" class="logo" target="_self">
-            <i class="fas fa-wifi"></i>
-            PORTAL DO CLIENTE
-        </a>
-        <ul class="nav-links">
-            <li><a href="#servicos" target="_self">Serviços</a></li>
-            <li><a href="#vantagens" target="_self">Vantagens</a></li>
-            <li><a href="#passoapasso" target="_self">Como Funciona</a></li>
-            <li><a href="#contato" target="_self">Contato</a></li>
-        </ul>
-        <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
-            <i class="fas fa-bars"></i>
-        </button>
+    <nav>
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#empresa">Empresa</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#privacidade">Privacidade</a></li>
+        <li><a href="#termos">Termos de Uso</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
     </nav>
+  </div>
+</header>
 
-    <!-- HERO -->
-    <section class="hero" id="inicio">
-        <div class="float-orb orb-1"></div>
-        <div class="float-orb orb-2"></div>
-        <div class="float-orb orb-3"></div>
-        <div class="hero-content">
-            <div class="hero-badge">
-                <i class="fas fa-circle-check"></i>
-                Atendimento 100% Digital
-            </div>
-            <h1>Portal de <span>Atendimento</span> ao Cliente!</h1>
-            <p>Emita boletos, tire dúvidas, soluções rápidas e eficazes para problemas de conexão, configuração e desempenho da sua rede. Tudo direto no seu celular.</p>
-            <a href="https://wa.me/5511969421450?text=Ol%C3%A1%21%20Vim%20pelo%20Portal%20do%20Cliente%20e%20gostaria%20de%20solicitar%20atendimento." class="btn-primary">
-                <i class="fas fa-comment-dots"></i>
-                SOLICITAR ATENDIMENTO
-            </a>
+<main>
+
+  <section class="hero" id="inicio">
+    <div class="container">
+      <div class="hero-content">
+        <h1>BR<span>CONDOS</span></h1>
+        <p>
+          Sociedade de Crédito Direto S.A., comprometida com soluções
+          financeiras digitais, segurança, transparência e relacionamento
+          responsável com seus clientes.
+        </p>
+        <a href="#empresa" class="btn">Conheça a empresa</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="empresa">
+    <div class="container">
+      <div class="section-title">
+        <h2>Sobre a BRCONDOS</h2>
+        <p>Informações institucionais da empresa.</p>
+      </div>
+
+      <div class="about-grid">
+        <div>
+          <h3>BRCONDOS Sociedade de Crédito Direto S.A.</h3>
+
+          <p>
+            A BRCONDOS Sociedade de Crédito Direto S.A. atua no segmento
+            financeiro, buscando oferecer uma experiência digital segura,
+            transparente e eficiente aos seus clientes e parceiros.
+          </p>
+
+          <p>
+            Nossa atuação é orientada por princípios de responsabilidade,
+            segurança da informação, transparência e respeito à legislação
+            aplicável.
+          </p>
+
+          <p>
+            Para informações específicas sobre produtos, serviços, contratos
+            ou atendimento, utilize os canais oficiais disponibilizados pela
+            empresa.
+          </p>
         </div>
-    </section>
 
-    <!-- SERVICES -->
-    <section class="services" id="servicos">
-        <div class="container">
-            <div class="section-header animate">
-                <span class="section-label">Nossos Serviços</span>
-                <h2>Tudo o que você precisa saber para usar nossos serviços da melhor forma!</h2>
-                <p>Escolha a opção que melhor atende à sua necessidade e resolva em minutos.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card animate delay-1">
-                    <div class="service-icon icon-boleto"><i class="fas fa-file-invoice-dollar"></i></div>
-                    <h3>Emitir 2ª Via Atualizada</h3>
-                    <p>Peça a segunda via do seu boleto e receba os dados para pagamento no suporte digital.</p>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Receba a via atualizada</li>
-                        <li><i class="fas fa-check-circle"></i> Dados inclusos para pagamento</li>
-                        <li><i class="fas fa-check-circle"></i> Suporte rápido</li>
-                    </ul>
-                    <a href="https://wa.me/5511969421450?text=Ol%C3%A1%21%20Preciso%20da%202%C2%AA%20via%20do%20meu%20boleto%20atualizado." class="btn btn-blue">EMITIR 2ª VIA</a>
-                </div>
-                <div class="service-card animate delay-2">
-                    <div class="service-icon icon-suporte"><i class="fas fa-screwdriver-wrench"></i></div>
-                    <h3>Suporte Técnico</h3>
-                    <p>Verifique pelo suporte a solução rápida para seu problema com a internet, entre em contato.</p>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Verificação de condições</li>
-                        <li><i class="fas fa-check-circle"></i> Alternativas apresentadas no suporte</li>
-                        <li><i class="fas fa-check-circle"></i> Procedimento online</li>
-                    </ul>
-                    <a href="https://wa.me/5511969421450?text=Ol%C3%A1%21%20Estou%20com%20problema%20na%20minha%20conex%C3%A3o%20e%20preciso%20de%20suporte%20t%C3%A9cnico." class="btn btn-green">SOLICITAR SUPORTE</a>
-                </div>
-                <div class="service-card animate delay-3">
-                    <div class="service-icon icon-cancel"><i class="fas fa-user-xmark"></i></div>
-                    <h3>Cancelamento</h3>
-                    <p>Solicite o cancelamento quando quiser, suporte online disponível para cancelamento.</p>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Atendimento exclusivo</li>
-                        <li><i class="fas fa-check-circle"></i> Instruções no suporte</li>
-                        <li><i class="fas fa-check-circle"></i> Atendimento sigiloso para você</li>
-                    </ul>
-                    <a href="https://wa.me/5511969421450?text=Ol%C3%A1%21%20Gostaria%20de%20solicitar%20o%20cancelamento%20do%20meu%20servi%C3%A7o." class="btn btn-red">CANCELAMENTO IMEDIATO</a>
-                </div>
-            </div>
+        <div class="info-box">
+          <div>
+            <strong>Razão Social</strong>
+            BRCONDOS Sociedade de Crédito Direto S.A.
+          </div>
+
+          <div>
+            <strong>Endereço</strong>
+            Rua Max Colin, 1030, Sala 08
+          </div>
+
+          <div>
+            <strong>Bairro</strong>
+            América
+          </div>
+
+          <div>
+            <strong>Cidade / Estado</strong>
+            Joinville - SC
+          </div>
+
+          <div>
+            <strong>CEP</strong>
+            89216-000
+          </div>
+
+          <div>
+            <strong>País</strong>
+            Brasil
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- ADVANTAGES -->
-    <section class="advantages" id="vantagens">
-        <div class="container">
-            <div class="advantages-inner">
-                <div class="advantages-img animate-left">
-                    <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=600&h=700&fit=crop&crop=faces" alt="Mulher sorrindo usando fones de ouvido e celular">
-                </div>
-                <div class="advantages-content">
-                    <div class="section-header animate" style="text-align:left; margin:0 0 40px 0;">
-                        <span class="section-label">Diferenciais</span>
-                        <h2>Vantagens da nossa Plataforma</h2>
-                        <p>Facilidades pensadas para o seu dia a dia!</p>
-                    </div>
-                    <div class="advantages-list">
-                        <div class="advantage-item animate delay-1">
-                            <div class="advantage-icon"><i class="fas fa-heart"></i></div>
-                            <div>
-                                <h4>Suporte Humanizado</h4>
-                                <p>Um canal digital pensado para guiar sua demanda com objetividade e transparência.</p>
-                            </div>
-                        </div>
-                        <div class="advantage-item animate delay-2">
-                            <div class="advantage-icon"><i class="fas fa-shield-halved"></i></div>
-                            <div>
-                                <h4>Dados Protegidos</h4>
-                                <p>As informações compartilhadas no suporte seguem as diretrizes vigentes e a política de privacidade.</p>
-                            </div>
-                        </div>
-                        <div class="advantage-item animate delay-3">
-                            <div class="advantage-icon"><i class="fas fa-bolt"></i></div>
-                            <div>
-                                <h4>Rapidez no Processo</h4>
-                                <p>Faça suas solicitações pelo celular, sem precisar se deslocar até um local físico.</p>
-                            </div>
-                        </div>
-                        <div class="advantage-item animate delay-4">
-                            <div class="advantage-icon"><i class="fas fa-mobile-screen"></i></div>
-                            <div>
-                                <h4>Acesso Direto e Fácil</h4>
-                                <p>Inicie sua demanda quando quiser e receba retorno de acordo com a disponibilidade da equipe.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="advantages-cta animate delay-5">
-                        <a href="https://wa.me/5511969421450?text=Ol%C3%A1%21%20Vim%20pelo%20Portal%20do%20Cliente%20e%20gostaria%20de%20solicitar%20atendimento." class="btn-primary"><i class="fas fa-comment-dots"></i> SOLICITAR ATENDIMENTO</a>
-                    </div>
-                </div>
-            </div>
+  <section class="services" id="servicos">
+    <div class="container">
+      <div class="section-title">
+        <h2>Atuação</h2>
+        <p>
+          Conheça os principais compromissos que orientam a atuação
+          institucional da BRCONDOS.
+        </p>
+      </div>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-icon">◆</div>
+          <h3>Serviços Financeiros</h3>
+          <p>
+            Soluções financeiras digitais desenvolvidas de acordo com a
+            legislação e as condições aplicáveis a cada produto ou serviço.
+          </p>
         </div>
-    </section>
 
-    <!-- STEPS -->
-    <section class="steps" id="passoapasso">
-        <div class="container">
-            <div class="section-header animate">
-                <span class="section-label">Processo</span>
-                <h2>Passo a Passo</h2>
-                <p>Três etapas rápidas para ser atendido</p>
-            </div>
-            <div class="steps-grid">
-                <div class="step-connector"></div>
-                <div class="step-card animate delay-1">
-                    <div class="step-number">1</div>
-                    <h3>Abra o Chat</h3>
-                    <p>Toque no botão <strong>SOLICITAR ATENDIMENTO</strong> e inicie a conversa com nosso canal de suporte digital.</p>
-                </div>
-                <div class="step-card animate delay-2">
-                    <div class="step-number">2</div>
-                    <h3>Descreva o Que Precisa</h3>
-                    <p>Diga se quer segunda via do boleto, solicitar atendimento para resolver problemas com sua internet ou cancelamento.</p>
-                </div>
-                <div class="step-card animate delay-3">
-                    <div class="step-number">3</div>
-                    <h3>Receba o Retorno</h3>
-                    <p>A equipe envia as orientações e dados conforme o que foi solicitado.</p>
-                </div>
-            </div>
-            <div class="steps-cta animate">
-                <a href="https://wa.me/5511969421450?text=Ol%C3%A1%21%20Vim%20pelo%20Portal%20do%20Cliente%20e%20gostaria%20de%20solicitar%20atendimento." class="btn-primary"><i class="fas fa-paper-plane"></i> SOLICITAR ATENDIMENTO</a>
-            </div>
+        <div class="card">
+          <div class="card-icon">✓</div>
+          <h3>Transparência</h3>
+          <p>
+            Informações claras e acessíveis sobre a empresa, seus serviços,
+            condições e documentos aplicáveis.
+          </p>
         </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer class="footer" id="contato">
-        <div class="footer-content">
-            <div class="footer-icon"><i class="fas fa-headset"></i></div>
-            <h3>Precisa de Ajuda?</h3>
-            <p>Sinta-se à vontade para entrar em contato conosco se tiver algum problema. Nossa equipe de suporte está disponível <strong>24 horas por dia, 7 dias por semana</strong>.</p>
-            <a href="https://wa.me/5511969421450?text=Ol%C3%A1%21%20Preciso%20de%20ajuda.%20Vim%20pelo%20Portal%20do%20Cliente." class="btn-accent">
-                <i class="fas fa-comment-dots"></i>
-                INICIAR ATENDIMENTO
-            </a>
-            <div class="footer-legal">
-                <button onclick="openModal('privacy')"><i class="fas fa-lock" style="margin-right:6px;"></i>Política de Privacidade</button>
-                <button onclick="openModal('terms')"><i class="fas fa-file-contract" style="margin-right:6px;"></i>Termos de Uso</button>
-            </div>
-
-            <div class="footer-bottom">
-                <p>© 2026 Portal do Cliente. Todos os direitos reservados.</p>
-                <p>CNPJ: 49.933.388/0001-72</p>
-            </div>
+        <div class="card">
+          <div class="card-icon">🔒</div>
+          <h3>Segurança</h3>
+          <p>
+            Compromisso com práticas de segurança e proteção das informações
+            tratadas pela empresa.
+          </p>
         </div>
-    </footer>
 
-    <!-- MODAL -->
-    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-        <div class="modal-card" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-            <div id="modalContent"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="legal" id="privacidade">
+    <div class="container">
+      <div class="section-title">
+        <h2>Política de Privacidade</h2>
+        <p>
+          Informações gerais sobre privacidade e proteção de dados.
+        </p>
+      </div>
+
+      <div class="legal-content">
+
+        <div class="legal-box">
+          <h3>1. Objetivo</h3>
+          <p>
+            Esta Política de Privacidade descreve, de forma geral, como a
+            BRCONDOS Sociedade de Crédito Direto S.A. trata informações
+            pessoais no contexto de seus serviços, canais digitais e
+            relacionamento com usuários, clientes e parceiros.
+          </p>
         </div>
+
+        <div class="legal-box">
+          <h3>2. Dados pessoais</h3>
+          <p>
+            Poderão ser tratados dados fornecidos pelo titular, informações
+            necessárias à prestação de serviços, dados de navegação e outras
+            informações permitidas pela legislação aplicável.
+          </p>
+        </div>
+
+        <div class="legal-box">
+          <h3>3. Finalidades</h3>
+          <p>
+            Os dados poderão ser utilizados para prestação de serviços,
+            atendimento, cumprimento de obrigações legais e regulatórias,
+            prevenção a fraudes, segurança, melhoria dos serviços e demais
+            finalidades legítimas e informadas ao titular.
+          </p>
+        </div>
+
+        <div class="legal-box">
+          <h3>4. Segurança</h3>
+          <p>
+            A BRCONDOS adota medidas técnicas e organizacionais destinadas a
+            proteger informações contra acessos não autorizados, perda,
+            alteração, divulgação ou destruição indevida, observadas as
+            características e os riscos de cada tratamento.
+          </p>
+        </div>
+
+        <div class="legal-box">
+          <h3>5. Direitos dos titulares</h3>
+          <p>
+            Nos termos da legislação aplicável, especialmente da Lei Geral de
+            Proteção de Dados Pessoais (LGPD), os titulares poderão exercer
+            seus direitos relacionados aos seus dados pessoais, observadas as
+            hipóteses e limitações previstas em lei.
+          </p>
+        </div>
+
+        <div class="legal-box">
+          <h3>6. Atualizações</h3>
+          <p>
+            Esta política poderá ser atualizada periodicamente para refletir
+            alterações legais, regulatórias, operacionais ou relacionadas aos
+            serviços da empresa.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="legal" id="termos">
+    <div class="container">
+      <div class="section-title">
+        <h2>Termos de Uso</h2>
+        <p>Condições gerais para utilização deste website.</p>
+      </div>
+
+      <div class="legal-content">
+
+        <div class="legal-box">
+          <h3>1. Aceitação</h3>
+          <p>
+            Ao acessar este website, o usuário declara estar ciente destes
+            Termos de Uso. Caso não concorde com alguma condição, recomenda-se
+            não utilizar o website.
+          </p>
+        </div>
+
+        <div class="legal-box">
+          <h3>2. Conteúdo</h3>
+          <p>
+            As informações disponibilizadas neste website possuem caráter
+            institucional e informativo. A disponibilização de qualquer
+            informação não representa, por si só, oferta, promessa ou
+            contratação de produto financeiro.
+          </p>
+        </div>
+
+        <div class="legal-box">
+          <h3>3. Uso adequado</h3>
+          <p>
+            O usuário compromete-se a utilizar o website de maneira lícita,
+            respeitando a legislação vigente e os direitos da empresa e de
+            terceiros.
+          </p>
+        </div>
+
+        <div class="legal-box">
+          <h3>4. Propriedade intelectual</h3>
+          <p>
+            Textos, marcas, elementos visuais, código, estrutura e demais
+            conteúdos disponibilizados no website estão sujeitos à legislação
+            aplicável de propriedade intelectual, salvo indicação em contrário.
+          </p>
+        </div>
+
+        <div class="legal-box">
+          <h3>5. Links externos</h3>
+          <p>
+            Este website poderá eventualmente apresentar links para páginas
+            externas. A existência de tais links não implica necessariamente
+            responsabilidade da BRCONDOS pelo conteúdo ou pelas práticas desses
+            terceiros.
+          </p>
+        </div>
+
+        <div class="legal-box">
+          <h3>6. Alterações</h3>
+          <p>
+            A BRCONDOS poderá alterar, atualizar ou remover conteúdos deste
+            website a qualquer momento, observada a legislação aplicável.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contato">
+    <div class="container">
+      <div class="section-title">
+        <h2>Informações de Contato</h2>
+        <p>
+          Dados institucionais da BRCONDOS Sociedade de Crédito Direto S.A.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+
+        <div class="contact-card">
+          <h3>Empresa</h3>
+          <p>
+            BRCONDOS Sociedade de Crédito Direto S.A.
+          </p>
+        </div>
+
+        <div class="contact-card">
+          <h3>Endereço</h3>
+          <p>
+            Rua Max Colin, 1030<br>
+            Sala 08<br>
+            América<br>
+            Joinville - SC<br>
+            CEP 89216-000<br>
+            Brasil
+          </p>
+        </div>
+
+        <div class="contact-card">
+          <h3>Atendimento</h3>
+          <p>
+            Para atendimento, informações sobre produtos ou assuntos
+            relacionados à empresa, utilize os canais oficiais disponibilizados
+            pela BRCONDOS.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div>
+        <h3>BRCONDOS</h3>
+        <p>
+          BRCONDOS Sociedade de Crédito Direto S.A.
+        </p>
+        <p>
+          Soluções financeiras, segurança e transparência.
+        </p>
+      </div>
+
+      <div>
+        <h3>Empresa</h3>
+        <ul>
+          <li><a href="#empresa">Sobre a empresa</a></li>
+          <li><a href="#servicos">Atuação</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Informações</h3>
+        <ul>
+          <li><a href="#privacidade">Política de Privacidade</a></li>
+          <li><a href="#termos">Termos de Uso</a></li>
+        </ul>
+      </div>
+
     </div>
 
-    <script>
-        // Scroll animations
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+    <div class="copyright">
+      © 2026 BRCONDOS Sociedade de Crédito Direto S.A. — Todos os direitos reservados.
+      <br>
+      Rua Max Colin, 1030, Sala 08, América, Joinville - SC, CEP 89216-000, Brasil.
+    </div>
 
-        document.querySelectorAll('.animate, .animate-left, .animate-right').forEach(el => observer.observe(el));
+  </div>
+</footer>
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        /* ===== MODAL ===== */
-        const modalContent = {
-            privacy: `
-                <span class="modal-tag">Privacidade</span>
-                <h2>Política de Privacidade</h2>
-                <p><strong>Última atualização:</strong> 09 de setembro de 2026</p>
-
-                <h3>1. Coleta de Dados</h3>
-                <p>Coletamos apenas as informações necessárias para prestar o atendimento solicitado, como nome, telefone, dados do contrato e o conteúdo da sua solicitação.</p>
-
-                <h3>2. Uso das Informações</h3>
-                <p>As informações são utilizadas exclusivamente para:</p>
-                <ul>
-                    <li>Processar suas solicitações de atendimento;</li>
-                    <li>Emitir segunda via de boletos;</li>
-                    <li>Prestar suporte técnico;</li>
-                    <li>Processar solicitações de cancelamento;</li>
-                    <li>Cumprir obrigações legais.</li>
-                </ul>
-
-                <h3>3. Proteção dos Dados</h3>
-                <p>Adotamos medidas de segurança técnicas e administrativas para proteger seus dados contra acessos não autorizados, vazamentos ou qualquer forma de tratamento inadequado.</p>
-
-                <h3>4. Seus Direitos</h3>
-                <p>Nos termos da Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018), você pode solicitar a confirmação, o acesso, a correção, a anonimização ou a eliminação dos seus dados pessoais a qualquer momento pelo nosso canal de atendimento.</p>
-
-                <h3>5. Compartilhamento</h3>
-                <p>Não vendemos, alugamos ou comercializamos seus dados pessoais. O compartilhamento ocorre apenas quando estritamente necessário para a execução do serviço contratado ou por determinação legal.</p>
-
-                <h3>6. Alterações</h3>
-                <p>Esta política pode ser atualizada periodicamente. Recomendamos a revisão regular desta página para se manter informado sobre como protegemos suas informações.</p>
-            `,
-            terms: `
-                <span class="modal-tag">Termos</span>
-                <h2>Termos de Uso</h2>
-                <p><strong>Última atualização:</strong> 09 de setembro de 2026</p>
-
-                <h3>1. Aceitação</h3>
-                <p>Ao utilizar este portal de atendimento, você concorda com estes termos e condições de uso. Caso não concorde, por favor, não utilize os serviços disponibilizados.</p>
-
-                <h3>2. Serviços Oferecidos</h3>
-                <p>O portal disponibiliza canais digitais para:</p>
-                <ul>
-                    <li>Solicitação de 2ª via de boleto atualizada;</li>
-                    <li>Atendimento de suporte técnico;</li>
-                    <li>Solicitação de cancelamento de serviços.</li>
-                </ul>
-
-                <h3>3. Responsabilidades do Usuário</h3>
-                <p>Você se compromete a fornecer informações verdadeiras e precisas, além de manter seus dados cadastrais atualizados. O uso indevido do portal pode resultar na recusa ou suspensão do atendimento.</p>
-
-                <h3>4. Disponibilidade do Serviço</h3>
-                <p>Nos esforçamos para manter o portal disponível 24 horas por dia, 7 dias por semana, mas não garantimos funcionamento ininterrupto ou livre de erros, podendo haver interrupções para manutenção ou por motivos de força maior.</p>
-
-                <h3>5. Atendimento via WhatsApp</h3>
-                <p>Ao clicar nos botões de atendimento, você será redirecionado ao WhatsApp, plataforma de terceiros, ficando sujeito também aos termos de uso da mesma.</p>
-
-                <h3>6. Limitação de Responsabilidade</h3>
-                <p>Não nos responsabilizamos por falhas de conectividade do usuário, informações incorretas fornecidas pelo próprio usuário ou por danos decorrentes do uso inadequado do portal.</p>
-
-                <h3>7. Alterações dos Termos</h3>
-                <p>Estes termos podem ser alterados a qualquer momento. O uso continuado do portal após as alterações constitui aceitação dos novos termos.</p>
-            `
-        };
-
-        function openModal(type) {
-            const overlay = document.getElementById('modalOverlay');
-            const content = document.getElementById('modalContent');
-            content.innerHTML = modalContent[type];
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal(event) {
-            if (!event || event.target.id === 'modalOverlay') {
-                document.getElementById('modalOverlay').classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        }
-
-        /* ===== ÂNCORAS SEMPRE NA MESMA GUIA ===== */
-        document.querySelectorAll('a[href^="#"]').forEach(link => {
-            link.setAttribute('target', '_self');
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const id = this.getAttribute('href');
-                if (id.length > 1) {
-                    const target = document.querySelector(id);
-                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                } else {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            });
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
-        });
-    </script>
 </body>
 </html>
